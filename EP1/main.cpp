@@ -24,15 +24,12 @@ int main() {
   for(int i = 1; i <= is->getQuantidadeDeCanais(); i++)
     cout << i << ") " << *(is->getNomeDosCanais() + (i - 1)) << endl;
   cin >> numX;
-  //canalX = is->nomes[numX-1];
   canalX = *(is->getNomeDosCanais() + (numX - 1));
 
   cout << "Escolha o canal Y:" << endl;
-  for(int i = 1; i <= is->getQuantidadeDeCanais(); i++) {
-        cout << i << ") " << *(is->getNomeDosCanais() + (i - 1)) << endl;
-  }
+  for(int i = 1; i <= is->getQuantidadeDeCanais(); i++)
+    cout << i << ") " << *(is->getNomeDosCanais() + (i - 1)) << endl;
   cin >> numY;
-  //canalY = is->nomes[numY-1];
   canalY = *(is->getNomeDosCanais() + (numY - 1));
 
   // Obtem o numero de Pontos a adicionar
