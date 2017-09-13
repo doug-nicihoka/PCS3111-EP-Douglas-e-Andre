@@ -9,8 +9,6 @@
 using namespace std;
 
 int main() {
-  cout << "aperte o botao reset da placa." << endl;
-
   InterfaceSerial* is = new InterfaceSerial();
   is->inicializar(COMM);
   string nomeDaSerie, canalX, canalY;
