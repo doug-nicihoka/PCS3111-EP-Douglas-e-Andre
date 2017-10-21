@@ -2,42 +2,34 @@
 #define PONTO_H
 
 class Ponto {
-public:
-  /**
-   * Obtem o valor do Ponto na coordenada horizontal (x).
-   */
-   double x, y;
-   double getX();
+    private:
+        double x, y;
+    public:
+        Ponto(double x, double y);
+        virtual ~Ponto();
 
-  /**
-   * Obtem o valor do Ponto na coordenada vertical (y).
-   */
-   double getY();
+        /**
+        * Obtem o valor do Ponto na coordenada horizontal (x).
+        */
+        double getX();
 
-  /**
-   * Define o valor do Ponto na coordenada horizontal (x).
-   */
-   void setX(double x);
+        /**
+        * Obtem o valor do Ponto na coordenada vertical (y).
+        */
+        double getY();
 
-  /**
-   * Define o valor do Ponto na coordenada vertical (y).
-   */
-   void setY(double y);
+        /**
+        * Imprime na saida padrao (cout) o Ponto no formato (x, y).
+        * Pule uma linha apos imprimir o Ponto.
+        */
+        void imprimir();
 
-  /**
-   * Imprime na saida padrao (cout) o Ponto no formato (x, y).
-   * Pule uma linha apos imprimir o Ponto.
-   */
-   void imprimir();
-
-  /**
-   * Informa se este Ponto eh igual a outro.
-   * Um Ponto eh igual se os valores x e y dos Pontos sao
-   * suficientemente proximos.
-   */
-   bool eIgual(Ponto* outro);
-
-  // ADICIONE OS ATRIBUTOS NECESSARIOS
+        /**
+        * Informa se este Ponto eh igual a outro.
+        * Um Ponto eh igual se os valores x e y dos Pontos sao
+        * suficientemente proximos.
+        */
+        bool eIgual(Ponto* outro);
 };
 
 #endif // PONTO_H
