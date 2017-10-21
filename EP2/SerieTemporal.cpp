@@ -9,6 +9,7 @@ void SerieTemporal::adicionar(double valor) {
     for (int i = 0; i < quantidade; i++)
         if (abs((getPosicao(i)->getX()) - tempo) <= 1e-5) {
             eixoY[i] = valor;
+            tempo += 1;
             return;
         }
 
