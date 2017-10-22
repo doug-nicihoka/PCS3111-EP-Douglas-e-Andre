@@ -1,7 +1,6 @@
 #ifndef GRAFICO_H
 #define GRAFICO_H
 
-#include <string>
 #include "Eixo.h"
 #include "Serie.h"
 #include "Tela.h"
@@ -27,4 +26,4 @@ class Eixo {
         void desenhar();
 };
 
-#endif // EIXO_H
+#endif // GRAFICO_H
