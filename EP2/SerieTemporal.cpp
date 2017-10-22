@@ -18,6 +18,8 @@ void SerieTemporal::adicionar(double valor) {
 }
 
 void SerieTemporal::adicionar(double x, double y) {
+    if (x < 1)
+        return;
     for (int i = 0; i < quantidade; i++)
         if (std::abs(getPosicao(i)->getX() - x) <= 1e-5) {
             eixoY[i] = y;
