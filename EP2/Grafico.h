@@ -10,7 +10,7 @@ class Eixo {
     protected:
         Eixo* x;
         Eixo* y;
-        Serie* Serie;
+        Serie* serie;
     public:
         /**
         * Cria um grafico informando os eixos e a serie.
