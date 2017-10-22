@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Ponto.h"
-using namespace std;
 
 Ponto::Ponto(double x, double y) : x (x), y (y) {}
 
@@ -15,7 +14,7 @@ double Ponto::getY() {
 }
 
 void Ponto::imprimir() {
-    cout << "(" << getX() << ", " << getY() << ")" << endl;
+    std::cout << "(" << getX() << ", " << getY() << ")" << std::endl;
 }
 
 bool Ponto::eIgual(Ponto* outro) {
