@@ -17,7 +17,7 @@ Eixo* Grafico::getEixoY() {
     return y;
 }
 
-Eixo* Grafico::getSerie() {
+Serie* Grafico::getSerie() {
     return serie;
 }
 
