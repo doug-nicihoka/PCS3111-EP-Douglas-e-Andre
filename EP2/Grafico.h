@@ -24,6 +24,7 @@ class Eixo {
         /**
         * Desenha o grafico na tela.
         */
+        void desenhar();
 };
 
 #endif // EIXO_H
