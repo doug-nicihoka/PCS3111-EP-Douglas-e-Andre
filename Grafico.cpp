@@ -1,30 +1,30 @@
 #include "Grafico.h"
 
-Grafico:: Grafico(Eixo* x, Eixo* y, Serie* serie) : 
+Grafico::Grafico(Eixo* x, Eixo* y, Serie* serie) : 
     x (x), y (y), serie (serie) {}
 
 Grafico::~Grafico() {}
 
 Eixo* Grafico::getEixoX() {
-  return x;
+    return x;
 }
 
 Eixo* Grafico::getEixoY() {
-  return y;
+    return y;
 }
 
 Eixo* Grafico::getSerie() {
-  return  serie;
+    return  serie;
 }
 
 void Grafico::desenhar() {
-  Tela* t = new Tela;
-  t->setEixoX(x->getTitulo(), x->getMinimo(), x->getMaximo());
-  t->setEixoY(y->getTitulo(), y->getMinimo(), y->getMaximo());
-  
-  for(int i = 0; i < serie->getQuantidade(); i++)
-    t->plotar(serie->getNome(), serie->getPosicao(i)->getX(), serie->getPosicao(i)->getY());
+    Tela* t = new Tela;
+    t->setEixoX(x->getTitulo(), x->getMinimo(), x->getMaximo());
+    t->setEixoY(y->getTitulo(), y->getMinimo(), y->getMaximo());
+    
+    for(int i = 0; i < serie->getQuantidade(); i++)
+        t->plotar(serie->getNome(), serie->getPosicao(i)->getX(), serie->getPosicao(i)->getY());
       
-  t->mostrar();
-  delete t;
+    t->mostrar();
+    delete t;
 }
