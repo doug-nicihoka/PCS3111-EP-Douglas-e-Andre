@@ -1,6 +1,8 @@
 #include "Serie.h"
 #include <iostream>
-using namespace std;
+using std::string;
+using std::cout;
+using std::endl;
 
 Serie::Serie(string nome, string nomeDoCanalX, string nomeDoCanalY) :
     nome (nome), nomeDoCanalX (nomeDoCanalX), nomeDoCanalY (nomeDoCanalY) {}
