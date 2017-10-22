@@ -6,24 +6,22 @@
 #include <string>
 #include "Ponto.h"
 
-using namespace std;
-
 class Serie {
     protected:
-        string nome, nomeDoCanalX, nomeDoCanalY;
+        std::string nome, nomeDoCanalX, nomeDoCanalY;
         double eixoX[NUMERO_MAXIMO_VALORES], eixoY[NUMERO_MAXIMO_VALORES];
         int quantidade = 0;
     public:
         /**
         * Cria uma Serie informando o nome dela e o nome dos canais X e Y.
         */
-        Serie(string nome, string nomeDoCanalX, string nomeDoCanalY);
+        Serie(std::string nome, std::string nomeDoCanalX, std::string nomeDoCanalY);
         virtual ~Serie();
 
         // Permite obter o nome, o nomeDoCanalX e o nomeDoCanalY.
-        virtual string getNome();
-        virtual string getNomeDoCanalX();
-        virtual string getNomeDoCanalY();
+        virtual std::string getNome();
+        virtual std::string getNomeDoCanalX();
+        virtual std::string getNomeDoCanalY();
 
         /**
         * Informa a quantidade de pontos que a Serie possui.
