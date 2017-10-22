@@ -1,7 +1,7 @@
 #include "Grafico.h"
 
-Grafico:: Grafico(Eixo* x, Eixo* y, Serie* Serie) : 
-    x (x), y (y), Serie (serie) {}
+Grafico:: Grafico(Eixo* x, Eixo* y, Serie* serie) : 
+    x (x), y (y), serie (serie) {}
 
 Grafico::~Grafico() {}
 
