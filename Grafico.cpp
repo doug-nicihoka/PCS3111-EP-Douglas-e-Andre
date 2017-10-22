@@ -1,6 +1,6 @@
 #include "Grafico.h"
 
-Grafico::Grafico(Eixo* x, Eixo* y, Serie* serie) : 
+Grafico::Grafico(Eixo* x, Eixo* y, Serie* serie) :
     x (x), y (y), serie (serie) {}
 
 Grafico::~Grafico() {
@@ -18,7 +18,7 @@ Eixo* Grafico::getEixoY() {
 }
 
 Eixo* Grafico::getSerie() {
-    return  serie;
+    return serie;
 }
 
 void Grafico::desenhar() {
@@ -28,7 +28,7 @@ void Grafico::desenhar() {
     
     for (int i = 0; i < serie->getQuantidade(); i++)
         t->plotar(serie->getNome(), serie->getPosicao(i)->getX(), serie->getPosicao(i)->getY());
-      
+    
     t->mostrar();
     delete t;
 }
