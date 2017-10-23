@@ -77,7 +77,7 @@ int main() {
 
     char tipoEixoY;
     Eixo* eixoY;
-    cout << "O eixo Y é estatico ou dinamico (e/d): ";
+    cout << "O eixo Y e estatico ou dinamico (e/d): ";
     cin >> tipoEixoY;
 
     if(tipoEixoY == 'e') {
