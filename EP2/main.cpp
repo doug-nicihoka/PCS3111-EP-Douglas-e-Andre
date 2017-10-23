@@ -42,7 +42,7 @@ int main() {
     cout << "Obter quantos pontos? ";
     cin >> quantidade;
     Serie* serie = new Serie(nomeDaSerie, canalX, canalY);
-    
+
     cout << "Obtendo os pontos" << endl;
     for (int i = 0; i < quantidade; i++) {
         is->atualizar();
@@ -70,7 +70,7 @@ int main() {
         double maximoPadraoEixoX, minimoPadraoEixoX;
         cout << "Valor minimo padrao: ";
         cin >> minimoPadraoEixoX;
-        cout << "Valor maximo:";
+        cout << "Valor maximo padrao:";
         cin >> maximoPadraoEixoX;
         eixoX = new EixoDinamico(minimoPadraoEixoX, maximoPadraoEixoX, serie, true);
     }
@@ -95,7 +95,7 @@ int main() {
         double maximoPadraoEixoY, minimoPadraoEixoY;
         cout << "Valor minimo padrao: ";
         cin >> minimoPadraoEixoY;
-        cout << "Valor maximo:";
+        cout << "Valor maximo padrao:";
         cin >> maximoPadraoEixoY;
         eixoY = new EixoDinamico(minimoPadraoEixoY, maximoPadraoEixoY, serie, false);
     }
