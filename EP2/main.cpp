@@ -41,7 +41,11 @@ int main() {
     int quantidade;
     cout << "Obter quantos pontos? ";
     cin >> quantidade;
-    Serie* serie = new Serie(nomeDaSerie, canalX, canalY);
+    Serie* serie;
+    if (numX == 0)
+        serie = new SerieTemporal(nomeDaSerie, canalY)
+    else
+        serie = new Serie(nomeDaSerie, canalX, canalY);
 
     cout << "Obtendo os pontos" << endl;
     for (int i = 0; i < quantidade; i++) {
