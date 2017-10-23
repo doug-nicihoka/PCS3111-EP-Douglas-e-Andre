@@ -18,7 +18,7 @@ int main() {
     is->inicializar();
     string nomeDaSerie, canalX, canalY;
     int numX, numY;
-    char tipoEixoX, tipoEixoY;
+
 
     // Obtem o nome da Serie e os canais escolhidos
     cout << "Informe o nome da serie: ";
@@ -36,16 +36,25 @@ int main() {
     cin >> numY;
     canalY = *(is->getNomeDosCanais() + (numY - 1));
 
+
     // Obtem o numero de Pontos a adicionar
     int quantidade;
     cout << "Obter quantos pontos? ";
     cin >> quantidade;
-    Serie* s = new Serie(nomeDaSerie, canalX, canalY);
-
+    Serie* serie = new Serie(nomeDaSerie, canalX, canalY);
+    
+    cout << "Obtendo os pontos" << endl;
+    for (int i = 0; i < quantidade; i++) {
+        is->atualizar();
+        serie->adicionar(is->getValor(canalX), is->getValor(canalY));
+    }
     //Gerar o Grafico
-    cout << "Gerando o grafico " ;
-    cout << "O eixo X é estatico ou dinamico (e/d): ";
+    cout << "Gerando o grafico " << endl;
+    char tipoEixoX;
+    Eixo* eixoX;
+    cout << "O eixo X e estatico ou dinamico (e/d): ";
     cin >> tipoEixoX;
+
     if(tipoEixoX == 'e') {
         string tituloEixoX;
         double maximoEixoX, minimoEixoX;
@@ -55,7 +64,7 @@ int main() {
         cin >> minimoEixoX;
         cout << "Valor maximo:";
         cin >> maximoEixoX;
-        Eixo *eixoX = new Eixo(tituloEixoX, minimoEixoX, maximoEixoX);
+        eixoX = new Eixo(tituloEixoX, minimoEixoX, maximoEixoX);
     }
     else if (tipoEixoX == 'd') {
         double maximoPadraoEixoX, minimoPadraoEixoX;
@@ -63,11 +72,14 @@ int main() {
         cin >> minimoPadraoEixoX;
         cout << "Valor maximo:";
         cin >> maximoPadraoEixoX;
-        EixoDinamico *eixoX = new EixoDinamico(minimoPadraoEixoX, maximoPadraoEixoX, s, true);
+        eixoX = new EixoDinamico(minimoPadraoEixoX, maximoPadraoEixoX, serie, true);
     }
 
+    char tipoEixoY;
+    Eixo* eixoY;
     cout << "O eixo Y é estatico ou dinamico (e/d): ";
     cin >> tipoEixoY;
+
     if(tipoEixoY == 'e') {
         string tituloEixoY;
         double maximoEixoY, minimoEixoY;
@@ -77,7 +89,7 @@ int main() {
         cin >> minimoEixoY;
         cout << "Valor maximo:";
         cin >> maximoEixoY;
-        Eixo *eixoY = new Eixo(tituloEixoY, minimoEixoY, maximoEixoY);
+        eixoY = new Eixo(tituloEixoY, minimoEixoY, maximoEixoY);
     }
     else if (tipoEixoY == 'd') {
         double maximoPadraoEixoY, minimoPadraoEixoY;
@@ -85,9 +97,11 @@ int main() {
         cin >> minimoPadraoEixoY;
         cout << "Valor maximo:";
         cin >> maximoPadraoEixoY;
-        EixoDinamico *eixoY = new EixoDinamico(minimoPadraoEixoY, maximoPadraoEixoY, s, false);
+        eixoY = new EixoDinamico(minimoPadraoEixoY, maximoPadraoEixoY, serie, false);
     }
-    Grafico* g = new Grafico(eixoX, eixoY, s);
+
+
+    Grafico* g = new Grafico(eixoX, eixoY, serie);
     g->desenhar();
     return 0;
 }
