@@ -25,6 +25,7 @@ int main() {
     cin >> nomeDaSerie;
 
     cout << "Escolha o canal X: " << endl;
+    cout << "0) Tempo" << endl;
     for(int i = 1; i <= is->getQuantidadeDeCanais(); i++)
         cout << i << ") " << *(is->getNomeDosCanais() + (i - 1)) << endl;
     cin >> numX;
@@ -43,7 +44,7 @@ int main() {
     cin >> quantidade;
     Serie* serie;
     if (numX == 0)
-        serie = new SerieTemporal(nomeDaSerie, canalY)
+        serie = new SerieTemporal(nomeDaSerie, canalY);
     else
         serie = new Serie(nomeDaSerie, canalX, canalY);
 
