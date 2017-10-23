@@ -29,7 +29,10 @@ int main() {
     for(int i = 1; i <= is->getQuantidadeDeCanais(); i++)
         cout << i << ") " << *(is->getNomeDosCanais() + (i - 1)) << endl;
     cin >> numX;
-    canalX = *(is->getNomeDosCanais() + (numX - 1));
+    if (numX > 0)
+        canalX = *(is->getNomeDosCanais() + (numX - 1));
+    else if (numX == 0)
+        canalX = "Tempo";
 
     cout << "Escolha o canal Y:" << endl;
     for(int i = 1; i <= is->getQuantidadeDeCanais(); i++)
