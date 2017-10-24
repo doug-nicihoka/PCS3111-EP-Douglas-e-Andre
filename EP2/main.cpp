@@ -52,10 +52,21 @@ int main() {
         serie = new Serie(nomeDaSerie, canalX, canalY);
 
     cout << "Obtendo os pontos" << endl;
-    for (int i = 0; i < quantidade; i++) {
-        is->atualizar();
-        serie->adicionar(is->getValor(canalX), is->getValor(canalY));
+    if(SerieTemporal* serieT = dynamic_cast<SerieTemporal *>(serie)) {
+        for (int i = 0; i < quantidade; i++) {
+           is->atualizar();
+           serieT->adicionar(is->getValor(canalY));
+        }
     }
+    else {
+        for (int i = 0; i < quantidade; i++) {
+            is->atualizar();
+            serie->adicionar(is->getValor(canalX), is->getValor(canalY));
+        }
+    }
+    
+    
+    
     //Gerar o Grafico
     cout << "Gerando o grafico " << endl;
     char tipoEixoX;
