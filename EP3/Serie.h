@@ -1,8 +1,6 @@
 #ifndef SERIE_H
 #define SERIE_H
 
-#define NUMERO_MAXIMO_VALORES 10
-
 #include <string>
 #include <vector>
 #include "Ponto.h"
@@ -10,14 +8,13 @@
 class Serie {
     protected:
         std::string nome, nomeDoCanalX, nomeDoCanalY;
-        double eixoX[NUMERO_MAXIMO_VALORES], eixoY[NUMERO_MAXIMO_VALORES];
-        int quantidade = 0;
+        std::vector<Ponto*>* pontos;
     public:
         /**
         * Cria uma Serie informando o nome dela e o nome dos canais X e Y.
         */
         Serie(std::string nome, std::string nomeDoCanalX, std::string nomeDoCanalY);
-        // FaÁa o destrutor ser abstrato (puramente virtual)
+        // Fa√ßa o destrutor ser abstrato (puramente virtual)
         virtual ~Serie() = 0;
 
         // Permite obter o nome, o nomeDoCanalX e o nomeDoCanalY.
@@ -36,41 +33,41 @@ class Serie {
         virtual bool estaVazia();
 
         /**
-        * ObtÈm todos os pontos da Serie.
+        * Obt√©m todos os pontos da Serie.
         */
         virtual std::vector<Ponto*>* getPontos();
 
         /**
-        * ObtÈm um ponto representando o limite superior da Serie.
-        * A coordenada x desse ponto deve ser o m·ximo valor horizontal
-        * existente na Serie e a coordenada y deve ser o m·ximo valor
+        * Obt√©m um ponto representando o limite superior da Serie.
+        * A coordenada x desse ponto deve ser o m√°ximo valor horizontal
+        * existente na Serie e a coordenada y deve ser o m√°ximo valor
         * vertical existente na Serie.
         *
         * Por exemplo, para a Serie {(2, 3), (5, 1), (1, 2)} o limite
-        * superior È (5, 3).
-        * @throw runtime_error caso a Serie n„o tenha valores.
+        * superior √© (5, 3).
+        * @throw runtime_error caso a Serie n√£o tenha valores.
         */
         virtual Ponto* getLimiteSuperior();
 
         /**
-        * ObtÈm um ponto representando o limite inferior da Serie.
-        * A coordenada x desse ponto deve ser o mÌnimo valor horizontal
-        * existente na Serie e a coordenada y deve ser o mÌnimo valor
+        * Obt√©m um ponto representando o limite inferior da Serie.
+        * A coordenada x desse ponto deve ser o m√≠nimo valor horizontal
+        * existente na Serie e a coordenada y deve ser o m√≠nimo valor
         * vertical existente na Serie.
         *
         * Por exemplo, para a Serie {(2, 3), (5, 1), (1, 2)} o limite
-        * inferior È (1, 1).
-        * @throw runtime_error caso a Serie n„o tenha valores.
+        * inferior √© (1, 1).
+        * @throw runtime_error caso a Serie n√£o tenha valores.
         */
         virtual Ponto* getLimiteInferior();
 
         /**
-        * ObtÈm o ponto que est· na posiÁ„o definida da Serie. A contagem de
-        * posiÁıes comeÁa em 0.
+        * Obt√©m o ponto que est√° na posi√ß√£o definida da Serie. A contagem de
+        * posi√ß√µes come√ßa em 0.
         *
         * Por exemplo, para a Serie {(2, 3), (5, 1), (1, 2)}, getPosicao(0)
         * deve retornar (2, 3) e getPosicao(2) deve retornar (1, 2).
-        * @throw out_of_range caso a posiÁ„o seja inv·lida.
+        * @throw out_of_range caso a posi√ß√£o seja inv√°lida.
         */
         virtual Ponto* getPosicao(int posicao);
 
