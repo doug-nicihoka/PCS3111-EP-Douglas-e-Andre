@@ -10,8 +10,9 @@ Serie::Serie(string nome, string nomeDoCanalX, string nomeDoCanalY) : nome (nome
 }
 
 Serie::~Serie() {
-    for (unsigned int i = 0; i < pontos->size(); i++)
-        delete pontos->at(i);
+    vector<Ponto*>::iterator it;
+    for (it = pontos->begin(); it != pontos->end(); ++it)
+        delete *it;
     pontos->clear();
     delete pontos;
 }
@@ -44,14 +45,15 @@ vector<Ponto*>* Serie::getPontos() {
 Ponto* Serie::getLimiteSuperior() {
     if (!estaVazia()) {
         double maiorX = pontos->at(0)->getX();
-        for (unsigned int i = 0; i < pontos->size(); i++)
-            if (maiorX < pontos->at(i)->getX())
-                maiorX = pontos->at(i)->getX();
+        vector<Ponto*>::iterator it;
+        for (it = pontos->begin(); it != pontos->end(); ++it)
+            if (maiorX < (*it)->getX())
+                maiorX = (*it)->getX();
 
         double maiorY = pontos->at(0)->getY();
-        for (unsigned int i = 0; i < pontos->size(); i++)
-            if (maiorY < pontos->at(i)->getY())
-                maiorY = pontos->at(i)->getY();
+        for (it = pontos->begin(); it != pontos->end(); ++it)
+            if (maiorY < (*it)->getY())
+                maiorY = (*it)->getY();
 
         return new Ponto(maiorX, maiorY);
     }
@@ -61,14 +63,15 @@ Ponto* Serie::getLimiteSuperior() {
 Ponto* Serie::getLimiteInferior() {
     if (!estaVazia()) {
         double menorX = pontos->at(0)->getX();
-        for (unsigned int i = 0; i < pontos->size(); i++)
-            if (menorX > pontos->at(i)->getX())
-                menorX = pontos->at(i)->getX();
+        vector<Ponto*>::iterator it;
+        for (it = pontos->begin(); it != pontos->end(); ++it)
+            if (menorX > (*it)->getX())
+                menorX = (*it)->getX();
 
         double menorY = pontos->at(0)->getY();
-        for (unsigned int i = 0; i < pontos->size(); i++)
-            if (menorY > pontos->at(i)->getY())
-                menorY = pontos->at(i)->getY();
+        for (it = pontos->begin(); it != pontos->end(); ++it)
+            if (menorY > (*it)->getY())
+                menorY = (*it)->getY();
 
         return new Ponto(menorX, menorY);
     }
@@ -76,7 +79,8 @@ Ponto* Serie::getLimiteInferior() {
 }
 
 Ponto* Serie::getPosicao(int posicao) {
-    if (posicao >= 0 && posicao < pontos->size()) {
+    int tam = pontos->size();
+    if (posicao >= 0 && posicao < tam) {
         return pontos->at(posicao);
     }
     throw new out_of_range ("Posicao invalida.");
@@ -84,6 +88,7 @@ Ponto* Serie::getPosicao(int posicao) {
 
 void Serie::imprimir() {
     cout << "Serie " << getNome() << endl;
-    for (unsigned int i = 0; i < pontos->size(); i++)
-        cout << "(" << pontos->at(i)->getX() << ", " << pontos->at(i)->getY() << ")" << endl;
+    vector<Ponto*>::iterator it;
+    for (it = pontos->begin(); it != pontos->end(); ++it)
+        cout << "(" << (*it)->getX() << ", " << (*it)->getY() << ")" << endl;
 }
