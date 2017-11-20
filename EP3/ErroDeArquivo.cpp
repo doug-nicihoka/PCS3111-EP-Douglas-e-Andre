@@ -1,4 +1,4 @@
 #include "ErroDeArquivo.h"
 
-ErroDeArquivo::ErroDeArquivo(std::string mensagem) : logic_error (mensagem) {}
+ErroDeArquivo::ErroDeArquivo(std::string mensagem) : std::logic_error (mensagem) {}
 
