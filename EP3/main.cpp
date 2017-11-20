@@ -22,8 +22,8 @@ using namespace std;
 #define COMM "\\\\.\\COM3"
 
 int main() {
+    /* Inicializa e captura exceÃ§Ã£o em caso de falha */
     InterfaceSerial* is = new InterfaceSerial(COMM);
-    // Inicializa e captura exceção em caso de falha
     try {
         is->inicializar();
     }
@@ -34,18 +34,21 @@ int main() {
     }
 
 
-    // Obtém o nome do arquivo com os dados da Series
+
+    /* ObtÃ©m o nome do arquivo com os dados da Series */
     string dados;
     cout << "Informe o nome do arquivo de dados: ";
     cin >> dados;
 
 
-    // Obtém o nome da Serie e os canais escolhidos
+
+    /* ObtÃ©m o nome da Serie e os canais escolhidos */
     vector<string> nomesSeries, canaisX, canaisY;
     string nome;
     vector<int> numX, numY;
     int numero;
     char continuar = 's';
+    // Loop vÃ¡lido enquanto o usuÃ¡rio desejar adicionar outra serie
     do {
         cout << "Informe o nome da serie: ";
         cin >> nome;
@@ -75,64 +78,46 @@ int main() {
     while (continuar == 's');
 
 
-    // Obtem o numero de Pontos a adicionar
+
+    /* Obtem o numero de Pontos a adicionar */
     int quantidade;
     cout << "Obter quantos pontos? ";
     cin >> quantidade;
 
 
-    /* Testando vectors criados
-    for (vector<string>::iterator it = nomesSeries.begin(); it != nomesSeries.end(); ++it)
-        cout << *it << " ";
-    cout << endl;
-    for (vector<string>::iterator it = canaisX.begin(); it != canaisX.end(); ++it)
-        cout << *it << " ";
-    cout << endl;
-    for (vector<string>::iterator it = canaisY.begin(); it != canaisY.end(); ++it)
-        cout << *it << " ";
-    cout << endl;
-    for (vector<int>::iterator it = numX.begin(); it != numX.end(); ++it)
-        cout << *it << " ";
-    cout << endl;
-    for (vector<int>::iterator it = numY.begin(); it != numY.end(); ++it)
-        cout << *it << " ";
-    cout << endl;
-    */
 
-
-    // Obtem os Pontos
+    /* Obtem os Pontos */
     cout << "Obtendo os pontos" << endl;
-    list<Serie*>* series = new list<Serie*>;
+    list<Serie*>* series = new list<Serie*>();
     list<Serie*>::iterator itSerie;
-    SerieTemporal* st;
-    SerieNormal* sn;
     int contador = 0;
 
     try {
-        /* Loop com iterações = número de Series adicionadas */
+        // Loop com iteraÃ§Ãµes = num de Series adicionadas
         for (vector<int>::iterator itX = numX.begin(); itX != numX.end(); ++itX) {
-            /* Se Serie é uma SerieTemporal */
-            if ((*itX) == 0) {
+            if ((*itX) == 0) {  // Se Serie Ã© uma SerieTemporal
                 series->push_back(new SerieTemporal(nomesSeries[contador], canaisY[contador]));
-                cout << "Q" << series->size() << endl;
-                /* Condicional abaixo verifica se a Serie acima é o primeiro elemento da lista */
+
                 if (contador == 0) itSerie = series->begin();
-                /* Realiza casting e verifica se é válido */
-                st = dynamic_cast<SerieTemporal*>(*(itSerie++));
+                else ++itSerie;
+
+                SerieTemporal* st = dynamic_cast<SerieTemporal*>(*itSerie);
+
                 if (st) {
-                    /* Loop que adiciona os pontos da Serie */
                     for (int i = 0; i < quantidade; ++i) {
                             is->atualizar();
                             st->adicionar(is->getValor(canaisY[contador]));
                     }
                 }
             }
-            /* Se Serie é uma SerieNormal. Equivalente à implementação do código acima da SerieTemporal */
-            else {
+            else {              // Se Serie Ã© uma SerieNormal
                 series->push_back(new SerieNormal(nomesSeries[contador], canaisX[contador], canaisY[contador]));
-                cout << "Q" << series->size() << endl;
+
                 if (contador == 0) itSerie = series->begin();
-                sn = dynamic_cast<SerieNormal*>(*(itSerie++));
+                else ++itSerie;
+
+                SerieNormal* sn = dynamic_cast<SerieNormal*>(*itSerie);
+
                 if (sn) {
                     for (int i = 0; i < quantidade; ++i) {
                         is->atualizar();
@@ -143,7 +128,7 @@ int main() {
             ++contador;
         }
     }
-    /* Captura exceções dos métodos atualizar() e getValor() */
+    // Captura exceÃ§Ãµes dos mÃ©todos atualizar e getValor da InterfaceSerial
     catch (logic_error *e) {
         cout << e->what() << endl;
         delete e;
@@ -156,9 +141,11 @@ int main() {
     }
 
 
-    // Carrega arquivo com Series
+
+    /* Carrega arquivo com Series */
     char carregarSerie = 'a';
     cout << "Deseja carregar alguma serie? (s/n) ";
+    cin >> carregarSerie;
     if (carregarSerie == 's') {
         ifstream entrada;
         entrada.open(dados, ios::ate);
@@ -170,7 +157,8 @@ int main() {
     }
 
 
-    // Define o eixo X
+
+    /* Define o eixo X */
     string titulo;
     double maximo, minimo;
     char tipo;
@@ -198,7 +186,8 @@ int main() {
     }
 
 
-    // Define o eixo Y
+
+    /* Define o eixo Y */
     Eixo* eixoY;
     cout << "O eixo Y e' estatico ou dinamico (e/d): ";
     cin >> tipo;
@@ -223,7 +212,8 @@ int main() {
     }
 
 
-    // Desenha o grafico
+
+    /* Desenha o grafico */
     vector<Serie*>* vectorSeries = new vector<Serie*>;
     vectorSeries->reserve(series->size());
     copy(begin(*series), std::end(*series), back_inserter(*vectorSeries));
@@ -233,7 +223,8 @@ int main() {
     g->desenhar();
 
 
-    // Salva Series
+
+    /* Salva Series */
     cout << "Deseja salvar alguma serie? (s/n) ";
     cin >> continuar;
     if (continuar == 's') {
