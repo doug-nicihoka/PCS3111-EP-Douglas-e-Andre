@@ -4,7 +4,7 @@
 Eixo::Eixo(std::string titulo, double minimo, double maximo, bool orientacaoHorizontal) :
     titulo (titulo), minimo (minimo), maximo (maximo), orientacaoHorizontal (orientacaoHorizontal) {
     if (minimo >= maximo)
-        throw new std::runtime_error ("Minimo maior ou igual a maximo.");
+        throw new std::runtime_error ("ERRO: Minimo maior ou igual a maximo.");
 }
 
 Eixo::~Eixo() {}
