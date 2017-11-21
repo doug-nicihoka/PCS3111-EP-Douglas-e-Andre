@@ -3,18 +3,14 @@
 
 Grafico::Grafico(Eixo* x, Eixo* y, std::vector<Serie*>* series) : x (x), y (y), series (series) {
     if (!x->temOrientacaoHorizontal())
-        throw new std::logic_error ("Eixo x com orientacao vertical.");
+        throw new std::logic_error ("ERRO: Eixo x com orientacao vertical.");
     else if (y->temOrientacaoHorizontal())
-        throw new std::logic_error ("Eixo y com orientacao horizontal.");
+        throw new std::logic_error ("ERRO: Eixo y com orientacao horizontal.");
     else if (!series)
-        throw new std::logic_error ("Nao ha Serie.");
+        throw new std::logic_error ("ERRO: vector de Series nulo.");
 }
 
-Grafico::~Grafico() {
-    delete x;
-    delete y;
-    delete series;
-}
+Grafico::~Grafico() {}
 
 Eixo* Grafico::getEixoX() {
     return x;
