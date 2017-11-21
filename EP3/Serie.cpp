@@ -57,7 +57,7 @@ Ponto* Serie::getLimiteSuperior() {
 
         return new Ponto(maiorX, maiorY);
     }
-    throw new runtime_error ("Sem limite superior.");
+    throw new runtime_error ("ERRO: Sem limite superior.");
 }
 
 Ponto* Serie::getLimiteInferior() {
@@ -75,7 +75,7 @@ Ponto* Serie::getLimiteInferior() {
 
         return new Ponto(menorX, menorY);
     }
-    throw new runtime_error ("Sem limite inferior.");
+    throw new runtime_error ("ERRO: Sem limite inferior.");
 }
 
 Ponto* Serie::getPosicao(int posicao) {
@@ -83,7 +83,7 @@ Ponto* Serie::getPosicao(int posicao) {
     if (posicao >= 0 && posicao < tam) {
         return pontos->at(posicao);
     }
-    throw new out_of_range ("Posicao invalida.");
+    throw new out_of_range ("ERRO: Posicao invalida.");
 }
 
 void Serie::imprimir() {
