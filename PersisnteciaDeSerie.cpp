@@ -107,37 +107,33 @@ vector<string>* PersistenciaDeSerie::getNomes()
     return nomesSeries;
 }
 
-void PersistenciaDeSerie::inserir(string nome, Serie* s)
+void PersistenciaDeSerie::inserir(std::string nome, Serie* s)
 {
-    string nomeNoArquivo, canalX, canalY;
-    bool tipoSerie;
-    int quantidadePontos;
-    double x, y;
-    for (vector<string>::iterator it = nomesSeries->begin(); it = nomesSeries->end(); ++it) {
-        if((*it)->getNome == nome)
-            throw new ErroDeArquivo("Erro: serie ja existente");
+    std::string nomeNoArquivo, canalX, canalY;
+
+    for (std::vector<std::string>::iterator it = nomesSeries->begin(); it != nomesSeries->end(); ++it) {
+        if(*it == nome)
+            throw new ErroDeArquivo("ERRO: Serie ja existente.");
     }
-    ofstream out;
-    out.open(arquivo);
-    out << nome << endl;
+    std::ofstream out;
+    out.open(arquivo, std::ios::app);
+    out << nome << std::endl;
     if(s->getNomeDoCanalX() != "Tempo") {
-        out << 1 << endl;
-        out << s->getQuantidade() << endl;
-        out << s->getNomeDoCanalX() << endl;
-        out << s->getNomeDoCanalY() << endl;
-        vector<Ponto*>::iterator it;
-        for(it = s->getPontos()->begin(); it != s->getPontos()->end; it++) {
-                out << (*it)->getX();
-                out << (*it)->getY();
+        out << 1 << std::endl;
+        out << s->getQuantidade() << std::endl;
+        out << s->getNomeDoCanalX() << std::endl;
+        out << s->getNomeDoCanalY() << std::endl;
+        for (std::vector<Ponto*>::iterator it = s->getPontos()->begin(); it != s->getPontos()->end; ++it) {
+                out << (*it)->getX() << std::endl;
+                out << (*it)->getY() << std::endl;
         }
     }
     else {
-        out << 0 << endl;
-        out << s->getQuantidade() << endl;
-        out << s->getNomeDoCanalY() << endl;
-        vector<Ponto*>::iterator it;
-        for(it = s->getPontos()->begin(); it != s->getPontos()->end; it++) {
-                out << (*it)->getY();
+        out << 0 << std::endl;
+        out << s->getQuantidade() << std::endl;
+        out << s->getNomeDoCanalY() << std::endl;
+        for(std::vector<Ponto*>::iterator it = s->getPontos()->begin(); it != s->getPontos()->end; it++) {
+                out << (*it)->getY() << std::endl;
         }
     }
 }
