@@ -2,6 +2,7 @@
 #include "ErroDeArquivo.h"
 #include "SerieNormal.h"
 #include "SerieTemporal.h"
+#include "Ponto.h"
 #include <fstream>
 
 PersistenciaDeSerie::PersistenciaDeSerie(std::string arquivo) : arquivo (arquivo) {
@@ -14,21 +15,28 @@ PersistenciaDeSerie::PersistenciaDeSerie(std::string arquivo) : arquivo (arquivo
 
     std::ifstream in;
     in.open(arquivo);
+    if(in.fail()) {
+        in.close();
+        return;
+    }
 
     while(!in.eof()) {
         in >> nome >> tipoSerie >> quantidade;
         if(in.fail()) {
+            in.close();
             throw new ErroDeArquivo("ERRO: arquivo com formato errado.");
         }
         nomesSeries->push_back(nome);
         if(tipoSerie) {
             in >> canalX >> canalY;
             if(in.fail()) {
+                in.close();
                 throw new ErroDeArquivo("ERRO: arquivo com formato errado.");
             }
             for(int i = 0; i < quantidade; ++i) {
                 in >> x >> y;
                 if(in.fail()) {
+                    in.close();
                     throw new ErroDeArquivo("ERRO: arquivo com formato errado.");
                 }
             }
@@ -36,16 +44,19 @@ PersistenciaDeSerie::PersistenciaDeSerie(std::string arquivo) : arquivo (arquivo
         else if(!tipoSerie) {
             in >> canalY;
             if(in.fail()) {
+                in.close();
                 throw new ErroDeArquivo("ERRO: arquivo com formato errado.");
             }
             for(int i = 0; i < quantidade; ++i) {
                 in >> y;
                 if(in.fail()) {
+                    in.close();
                     throw new ErroDeArquivo("ERRO: arquivo com formato errado.");
                 }
             }
         }
     }
+    in.close();
 }
 
 PersistenciaDeSerie::~PersistenciaDeSerie() {
@@ -102,8 +113,7 @@ Serie* PersistenciaDeSerie::obter(std::string nome)
     return nullptr;
 }
 
-vector<string>* PersistenciaDeSerie::getNomes()
-{
+std::vector<std::string>* PersistenciaDeSerie::getNomes() {
     return nomesSeries;
 }
 
@@ -123,17 +133,17 @@ void PersistenciaDeSerie::inserir(std::string nome, Serie* s)
         out << s->getQuantidade() << std::endl;
         out << s->getNomeDoCanalX() << std::endl;
         out << s->getNomeDoCanalY() << std::endl;
-        for (std::vector<Ponto*>::iterator it = s->getPontos()->begin(); it != s->getPontos()->end; ++it) {
+        /*for (std::vector<Ponto*>::iterator it = s->getPontos()->begin(); it != s->getPontos()->end; ++it) {
                 out << (*it)->getX() << std::endl;
                 out << (*it)->getY() << std::endl;
-        }
+        }*/
     }
     else {
         out << 0 << std::endl;
         out << s->getQuantidade() << std::endl;
         out << s->getNomeDoCanalY() << std::endl;
-        for(std::vector<Ponto*>::iterator it = s->getPontos()->begin(); it != s->getPontos()->end; it++) {
+        /*for(std::vector<Ponto*>::iterator it = s->getPontos()->begin(); it != s->getPontos()->end; it++) {
                 out << (*it)->getY() << std::endl;
-        }
+        }*/
     }
 }
