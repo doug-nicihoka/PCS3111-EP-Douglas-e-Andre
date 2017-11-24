@@ -4,41 +4,44 @@
 #include "SerieTemporal.h"
 #include <fstream>
 
-PersistenciaDeSerie::PersistenciaDeSerie(string arquivo) : arquivo (arquivo) {
-    nomesSeries = new vector<string>();
-    string nomeNoArquivo, canalX, canalY;
+PersistenciaDeSerie::PersistenciaDeSerie(std::string arquivo) : arquivo (arquivo) {
+    nomesSeries = new std::vector<std::string>;
+
+    std::string nome, canalX, canalY;
     bool tipoSerie;
-    int quantidadePontos;
+    int quantidade;
     double x, y;
-    ifstream in;
+
+    std::ifstream in;
     in.open(arquivo);
+
     while(!in.eof()) {
-        in >> nomeNoArquivo >> tipoSerie >> quantidadePontos;
+        in >> nome >> tipoSerie >> quantidade;
         if(in.fail()) {
-            throw new ErroDeArquivo("Erro: arquivo no formato errado");
+            throw new ErroDeArquivo("ERRO: arquivo com formato errado.");
         }
-        nomesSeries->push_back(nomeNoArquivo);
-        if(tipoSerie == 1) {
-            in >> canalX, canalY;
+        nomesSeries->push_back(nome);
+        if(tipoSerie) {
+            in >> canalX >> canalY;
             if(in.fail()) {
-                throw new ErroDeArquivo("Erro: arquivo no formato errado");
+                throw new ErroDeArquivo("ERRO: arquivo com formato errado.");
             }
-            for(int i = 0; i < quantidadePontos; i++) {
+            for(int i = 0; i < quantidade; ++i) {
                 in >> x >> y;
                 if(in.fail()) {
-                    throw new ErroDeArquivo("Erro: arquivo no formato errado");
+                    throw new ErroDeArquivo("ERRO: arquivo com formato errado.");
                 }
             }
         }
-        else if(tipoSerie == 0) {
+        else if(!tipoSerie) {
             in >> canalY;
             if(in.fail()) {
-                throw new ErroDeArquivo("Erro: arquivo no formato errado");
+                throw new ErroDeArquivo("ERRO: arquivo com formato errado.");
             }
-            for(int j = 0; j < quantidadePontos; j++) {
+            for(int i = 0; i < quantidade; ++i) {
                 in >> y;
                 if(in.fail()) {
-                    throw new ErroDeArquivo("Erro: arquivo no formato errado");
+                    throw new ErroDeArquivo("ERRO: arquivo com formato errado.");
                 }
             }
         }
