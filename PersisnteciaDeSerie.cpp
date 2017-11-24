@@ -52,34 +52,54 @@ PersistenciaDeSerie::~PersistenciaDeSerie() {
     delete nomesSeries;
 }
 
-Serie* PersistenciaDeSerie::obter(string nome)
+Serie* PersistenciaDeSerie::obter(std::string nome)
 {
-    string nomeNoArquivo, canalX,canalY;
+    std::string nomeNoArquivo, canalX,canalY;
     bool tipoSerie;
-    int quantidadePontos;
+    int quantidade;
     double x, y;
-    ifstream in;
+
+    std::ifstream in;
     in.open(arquivo);
+
     while(!in.eof()) {
-        in >> nomeNoArquivo >> tipoSerie >> quantidadePontos;
-        if(tipoSerie) {
-            in >> canalX >> canalY;
-            for(int i = 0; i < quantidadePontos; i++) {
-                in >> x >> y;
+        in >> nomeNoArquivo >> tipoSerie >> quantidade;
+        if(nomeNoArquivo == nome) {
+            if(tipoSerie) {
+                in >> canalX >> canalY;
+                SerieNormal* sn = new SerieNormal(nomeNoArquivo, canalX, canalY);
+                for(int i = 0; i < quantidade; ++i) {
+                    in >> x >> y;
+                    sn->adicionar(x, y);
+                }
+                return sn;
+            }
+            else {
+                in >> canalY;
+                SerieTemporal* st = new SerieTemporal(nomeNoArquivo, canalY);
+                for(int i = 0; i < quantidade; ++i) {
+                    in >> y;
+                    st->adicionar(y);
+                }
+                return st;
             }
         }
-        else if(!tipoSerie) {
-            in >> canalY;
-            for(int j = 0; j < quantidadePontos; j++) {
-                in >> y;
+        else {
+            if(tipoSerie) {
+                in >> canalX >> canalY;
+                for(int i = 0; i < quantidade; ++i) {
+                    in >> x >> y;
+                }
             }
-        }
-        if(nome == nomeNoArquivo) {
-            Serie *serieBuscada = new Serie(nomeDoArquivo, canalXDoArquivo, canalYDoArquivo);
-            return serieBuscada;
+            else if(!tipoSerie) {
+                in >> canalY;
+                for(int i = 0; i < quantidade; ++i) {
+                    in >> y;
+                }
+            }
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 vector<string>* PersistenciaDeSerie::getNomes()
