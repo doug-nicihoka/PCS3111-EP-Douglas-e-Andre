@@ -1,4 +1,8 @@
 #include "PersistenciaDeSerie.h"
+#include "ErroDeArquivo.h"
+#include "SerieNormal.h"
+#include "SerieTemporal.h"
+#include <fstream>
 
 PersistenciaDeSerie::PersistenciaDeSerie(string arquivo) : arquivo (arquivo) {
     nomesSeries = new vector<string>();
