@@ -4,6 +4,7 @@
 #include "SerieTemporal.h"
 #include "Ponto.h"
 #include <fstream>
+#include <string>
 
 PersistenciaDeSerie::PersistenciaDeSerie(std::string arquivo) : arquivo (arquivo) {
     nomesSeries = new std::vector<std::string>;
@@ -14,7 +15,7 @@ PersistenciaDeSerie::PersistenciaDeSerie(std::string arquivo) : arquivo (arquivo
     double x, y;
 
     std::ifstream in;
-    in.open(arquivo);
+    in.open(arquivo.c_str());
     if(in.fail()) {
         in.close();
         return;
@@ -71,7 +72,7 @@ Serie* PersistenciaDeSerie::obter(std::string nome)
     double x, y;
 
     std::ifstream in;
-    in.open(arquivo);
+    in.open(arquivo.c_str());
 
     while(!in.eof()) {
         in >> nomeNoArquivo >> tipoSerie >> quantidade;
@@ -110,7 +111,7 @@ Serie* PersistenciaDeSerie::obter(std::string nome)
             }
         }
     }
-    return nullptr;
+    return NULL;
 }
 
 std::vector<std::string>* PersistenciaDeSerie::getNomes() {
@@ -121,12 +122,14 @@ void PersistenciaDeSerie::inserir(std::string nome, Serie* s)
 {
     std::string nomeNoArquivo, canalX, canalY;
 
-    for (std::vector<std::string>::iterator it = nomesSeries->begin(); it != nomesSeries->end(); ++it) {
-        if(*it == nome)
+    std::vector<std::string>::iterator it;
+    for (it = nomesSeries->begin(); it != nomesSeries->end(); ++it) {
+        if((*it) == nome)
             throw new ErroDeArquivo("ERRO: Serie ja existente.");
     }
+
     std::ofstream out;
-    out.open(arquivo, std::ios::app);
+    out.open(arquivo.c_str(), std::ios::app);
     out << nome << std::endl;
     if(s->getNomeDoCanalX() != "Tempo") {
         out << 1 << std::endl;
