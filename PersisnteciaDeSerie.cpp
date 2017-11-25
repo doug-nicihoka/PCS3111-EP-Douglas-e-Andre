@@ -133,17 +133,17 @@ void PersistenciaDeSerie::inserir(std::string nome, Serie* s)
         out << s->getQuantidade() << std::endl;
         out << s->getNomeDoCanalX() << std::endl;
         out << s->getNomeDoCanalY() << std::endl;
-        /*for (std::vector<Ponto*>::iterator it = s->getPontos()->begin(); it != s->getPontos()->end; ++it) {
+        for (std::vector<Ponto*>::iterator it = s->getPontos()->begin(); it != s->getPontos()->end(); ++it) {
                 out << (*it)->getX() << std::endl;
                 out << (*it)->getY() << std::endl;
-        }*/
+        }
     }
     else {
         out << 0 << std::endl;
         out << s->getQuantidade() << std::endl;
         out << s->getNomeDoCanalY() << std::endl;
-        /*for(std::vector<Ponto*>::iterator it = s->getPontos()->begin(); it != s->getPontos()->end; it++) {
+        for(std::vector<Ponto*>::iterator it = s->getPontos()->begin(); it != s->getPontos()->end(); it++) {
                 out << (*it)->getY() << std::endl;
-        }*/
+        }
     }
 }
