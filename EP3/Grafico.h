@@ -3,7 +3,6 @@
 
 #include "Eixo.h"
 #include "Serie.h"
-#include "Tela.h"
 
 class Grafico {
     private:
@@ -13,10 +12,10 @@ class Grafico {
     public:
         /**
         * Cria um Grafico informando os Eixos e as Series.
-        * @throw logic_error caso o eixo x n„o tenha orientaÁ„o horizontal ou
-        * o eixo y n„o tenha orientaÁ„o vertical.
+        * @throw logic_error caso o eixo x n√£o tenha orienta√ß√£o horizontal ou
+        * o eixo y n√£o tenha orienta√ß√£o vertical.
         */
-        Grafico(Eixo* x, Eixo* y, vector<Serie*>* series);
+        Grafico(Eixo* x, Eixo* y, std::vector<Serie*>* series);
         virtual ~Grafico();
 
         Eixo* getEixoX();
