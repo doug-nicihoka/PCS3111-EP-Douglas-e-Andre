@@ -1,4 +1,5 @@
 #include "Grafico.h"
+#include "Tela.h"
 #include <stdexcept>
 
 Grafico::Grafico(Eixo* x, Eixo* y, std::vector<Serie*>* series) : x (x), y (y), series (series) {
