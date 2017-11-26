@@ -20,8 +20,8 @@ PersistenciaDeSerie::PersistenciaDeSerie(std::string arquivo) : arquivo (arquivo
         return;
     }
 
-    while(!in.eof()) {
-        in >> nome >> tipoSerie >> quantidade;
+    while(in >> nome) {
+        in >> tipoSerie >> quantidade;
         if(in.fail()) {
             in.close();
             throw new ErroDeArquivo("ERRO: arquivo com formato errado.");
