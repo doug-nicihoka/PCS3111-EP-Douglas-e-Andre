@@ -281,8 +281,6 @@ int main() {
     delete series;
 
     // Remove o vector com as series
-    //for (vector<Serie*>::iterator it = vectorSeries->begin(); it != vectorSeries->end(); ++it)
-    //    delete *it;
     vectorSeries->clear();
     delete vectorSeries;
 
