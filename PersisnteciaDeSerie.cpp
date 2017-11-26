@@ -73,8 +73,8 @@ Serie* PersistenciaDeSerie::obter(std::string nome)
     std::ifstream in;
     in.open(arquivo);
 
-    while(!in.eof()) {
-        in >> nomeNoArquivo >> tipoSerie >> quantidade;
+    while(in >> nomeNoArquivo) {
+        in >> tipoSerie >> quantidade;
         if(nomeNoArquivo == nome) {
             if(tipoSerie) {
                 in >> canalX >> canalY;
